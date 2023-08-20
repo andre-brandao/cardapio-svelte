@@ -40,11 +40,24 @@ export interface Pedido{
     observacao:string;
     quantidade:number;
 }
-
+// const data = {
+//     id: user.user.uid,
+//     email: user.user.email,
+//     editar_produtos: false,
+//     cadastrar_clientes: true,
+//     alterar_pedidos: false,
+//     controle_estoque: false,
+//     editar_permissoes: false
+// };
 export interface PermsAdmin{
     id:string;
     editar_produtos:boolean;
     cadastrar_clientes:boolean;
+    alterar_pedidos:boolean;
+    controle_estoque:boolean;
+    editar_permissoes:boolean;
+    email:string;
+    
 }
 
 

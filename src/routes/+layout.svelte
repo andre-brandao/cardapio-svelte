@@ -1,5 +1,7 @@
-<script>
+<script lang="ts">
 	import '../app.postcss';
+
+
 </script>
 <div class="flex justify-between">
 	<!-- <img
@@ -8,4 +10,6 @@
 		alt=""
 	/> -->
 </div>
+
+
 <slot />

@@ -59,14 +59,21 @@
 		Ultimos Pedidos
 	</a>
 	<a
-		href="/amin/estoque"
+		href="/admin/estoque"
 		class="{$page.route.id == '/admin/estoque'
         ? 'bg-background text-white'
         : ' bg-muted text-muted-foreground'} rounded-md px-1 font-bold transition-colors hover:text-primary"
 	>
 		Estoque
 	</a>
-
+	<a
+		href="/admin/perms"
+		class="{$page.route.id == '/admin/perms'
+        ? 'bg-background text-white'
+        : ' bg-muted text-muted-foreground'} rounded-md px-1 font-bold transition-colors hover:text-primary"
+	>
+		Permissoes Funcionarios
+	</a>
     <Button class="" on:click={() => signOut(auth)}>Sair</Button>
     
 </nav>

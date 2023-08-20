@@ -18,7 +18,7 @@
 		const user = await signInWithPopup(auth, provider);
 		const data = {
 			id: user.user.uid,
-			email: user.user.email,
+			email: user.user.email?? "",
 			editar_produtos: false,
 			cadastrar_clientes: true,
 			alterar_pedidos: false,

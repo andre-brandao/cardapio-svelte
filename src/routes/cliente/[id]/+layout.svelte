@@ -8,10 +8,7 @@
 	import AnimatedRoute from '$lib/AnimatedRoute.svelte';
 
 	export let data: LayoutData;
-	$:console.log($page);
-	
-	 
-
+	$: console.log($page);
 
 	const cliente = docStore<Cliente>(firestore, 'clientes/' + data.identificador);
 </script>
@@ -32,16 +29,27 @@
 	<nav
 		class="fixed bottom-0 left-0 right-0 bg-white flex justify-around items-center h-16 shadow-md z-10"
 	>
-		<a class="{($page.route.id === "/qrcode/[id]/pedidos")? 'bg-background text-white':'bg-slate-200'} p-2 rounded-sm" href="/qrcode/{data.identificador}/pedidos"> Pedidos </a>
+		<a
+			class="{$page.route.id === '/cliente/[id]/pedidos'
+				? 'bg-background text-white'
+				: 'bg-slate-200'} p-2 rounded-sm"
+			href="/cliente/{data.identificador}/pedidos"
+		>
+			Pedidos
+		</a>
 
-		<a class="{($page.route.id === "/qrcode/[id]/cardapio")? 'bg-background text-white' :'bg-slate-200'} p-2 rounded-sm" href="/qrcode/{data.identificador}/cardapio" > Cardapio </a>
+		<a
+			class="{$page.route.id === '/cliente/[id]/cardapio'
+				? 'bg-background text-white'
+				: 'bg-slate-200'} p-2 rounded-sm"
+			href="/cliente/{data.identificador}/cardapio"
+		>
+			Cardapio
+		</a>
 	</nav>
 
 	<AnimatedRoute>
-
-	<slot />
-
-
+		<slot />
 	</AnimatedRoute>
 {:else}
 	<!-- else content here -->
