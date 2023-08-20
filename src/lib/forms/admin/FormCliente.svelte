@@ -7,7 +7,7 @@
 	import * as Dialog from '$lib/components/ui/dialog';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
-	import * as Select  from '$lib/components/ui/select';
+	import * as Select from '$lib/components/ui/select';
 
 	function generateUid(): string {
 		const timestamp = new Date().getTime().toString();
@@ -37,7 +37,7 @@
 
 		const doc = await addDoc(clientes, $formData);
 		console.log('Cliente adicionado com sucesso');
-		console.log(current_time);
+		console.log(doc);
 	}
 
 	const formDefaults = {
@@ -50,6 +50,10 @@
 	};
 
 	const formData = writable(formDefaults);
+
+	$: {
+		console.log($formData.mesa);
+	}
 </script>
 
 <Dialog.Root>
@@ -74,13 +78,22 @@
 					placeholder="Arquiteclinio"
 				/>
 			</div>
-
+			<div class="grid grid-cols-4 items-center gap-4">
+				<Label class="text-right" for="mesa">Mesa</Label>
+				<Input
+					id="mesa"
+					bind:value={$formData.mesa}
+					class="col-span-3 bg-accent"
+					placeholder="Chale 1"
+				/>
+			</div>
+			<!-- 
 			<div class="grid grid-cols-4 items-center gap-4">
 				<Label class="text-right" for="mesa">Quarto</Label>
 
 				<Select.Root >
 					<Select.Trigger class="col-span-3 bg-accent">
-						<Select.Value  placeholder="" />
+						<Select.Value placeholder="Selecione um Quarto" />
 					</Select.Trigger>
 					<Select.Content>
 						<Select.Item value="Suite 1">Suite 1</Select.Item>
@@ -88,12 +101,14 @@
 						<Select.Item value="Chale 1">Chale 1</Select.Item>
 
 					</Select.Content>
+                    <Select.Input name={$formData.mesa}/>
 				</Select.Root>
-			</div>
+			</div> -->
 
-            <div class="grid grid-cols-4 items-center gap-4">
+			<div class="grid grid-cols-4 items-center gap-4">
 				<Label class="text-right" for="telefone">Telefone</Label>
 				<Input
+					type="tel"
 					id="telefone"
 					bind:value={$formData.telefone}
 					class="col-span-3 bg-accent"
@@ -105,7 +120,7 @@
 			<Button
 				type="submit"
 				on:click={() => {
-					// handleSubmit();
+					cadastrar_cliente();
 					// console.log(action);
 				}}>Save changes</Button
 			>
