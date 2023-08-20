@@ -2,10 +2,10 @@
 	import AnimatedRoute from '$lib/AnimatedRoute.svelte';
 	import Login from '$lib/Login.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
-	import { auth, firestore, user } from '$lib/firebase';
+	import { auth, firestore, storage, user } from '$lib/firebase';
 	import { signOut } from 'firebase/auth';
     import { page } from '$app/stores';
-	import { docStore } from 'sveltefire';
+	import { FirebaseApp, docStore } from 'sveltefire';
 	import type { PermsAdmin } from '$lib/firebase-types';
 	import { collection, query, where } from 'firebase/firestore';
 
@@ -18,7 +18,11 @@
 	// export let data: LayoutData;
 </script>
 
-{#if $user}
+<FirebaseApp {firestore} {auth} {storage}>
+
+	
+	
+	{#if $user}
 	<div class="flex justify-between">
 		<img
 			class="p-2 w-64 h-auto rounded-lg filter invert"
@@ -70,5 +74,7 @@
 		<slot />
 	</AnimatedRoute>
 {:else}
-	<Login />
+<Login />
 {/if}
+
+</FirebaseApp>

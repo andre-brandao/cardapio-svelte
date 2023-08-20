@@ -20,7 +20,7 @@
 
         <Card.Header class="flex-shrink-0">
             <Card.Title>{produto.nome}</Card.Title>
-            <Card.Description class='overflow-hidden line-clamp-5'>{produto.descricao}</Card.Description>
+            <Card.Description class='overflow-hidden line-clamp-2'>{produto.descricao}</Card.Description>
         </Card.Header>
         <!-- <Card.Content>
             <p>Card Content</p>
