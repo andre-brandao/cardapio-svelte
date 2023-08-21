@@ -54,7 +54,7 @@
 </script>
 
 <div class="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4">
-	{#each pedidos as pedido}
-		<CardPedido {pedido} />
+	{#each pedidos as pedido, i (pedido.id)}
+		<CardPedido {pedido} id={pedido.id ?? ''} />
 	{/each}
 </div>

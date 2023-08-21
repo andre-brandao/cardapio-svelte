@@ -6,6 +6,7 @@
 	import * as Table from '$lib/components/ui/table';
 	import Switch from '$lib/components/ui/switch/switch.svelte';
 	import { doc, updateDoc } from 'firebase/firestore';
+	import FormEditarPerms from '$lib/forms/admin/FormEditarPerms.svelte';
 
 	async function updatePerms(id: string, perms: PermsAdmin) {
 		
@@ -35,22 +36,8 @@
 		{#each perms as perm, i (perm.id)}
 			<!-- content here -->
 
-			<Table.Row>
-				<Table.Cell class="font-medium">{perm.email}</Table.Cell>
-				<Table.Cell>
-					<Switch bind:checked={perm.editar_produtos} />
-				</Table.Cell>
+			<FormEditarPerms {perm} id={perm.id}/>
 
-				<Table.Cell>
-					<Switch bind:checked={perm.controle_estoque} />
-				</Table.Cell>
-				<Table.Cell class="text-right">
-					<Switch
-						bind:checked={perm.alterar_pedidos}
-						on:change={() => updatePerms(perm.id, perm)}
-					/>
-				</Table.Cell>
-			</Table.Row>
 		{/each}
 	</Table.Body>
 </Table.Root>

@@ -1,9 +1,23 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
 	import * as Card from '$lib/components/ui/card';
+	import { firestore } from '$lib/firebase';
 	import type { Pedido } from '$lib/firebase-types';
-
+	import { doc, updateDoc } from 'firebase/firestore';
+	import * as AlertDialog from '$lib/components/ui/alert-dialog';
 	export let pedido: Pedido;
+	export let id: string;
+
+	function updateStatus(status: string, id: string) {
+		console.log(status, id);
+
+		if (id == '' || id == undefined) {
+			alert('id vazio');
+			return;
+		}
+		const pedidoRef = doc(firestore, 'pedidos', id);
+		updateDoc(pedidoRef, { status: status });
+	}
 </script>
 
 <Card.Root
@@ -25,7 +39,6 @@
 				<div>
 					{pedido.produto.nome}
 				</div>
-				
 			</div>
 		</Card.Title>
 		<div>
@@ -42,20 +55,49 @@
 	</div>
 	<Card.Content>
 		<div class="flex justify-evenly">
-			<Button
-				class="font-bold cursor-pointer flex items-center space-x-2 bg-green-500  rounded-2xl p-3"
-				>Entregue</Button
-			>
+			<AlertDialog.Root>
+				<AlertDialog.Trigger>
+					<Button
+						class="font-bold cursor-pointer flex items-center space-x-2 bg-green-500  rounded-2xl p-3"
+						>Entregue</Button
+					></AlertDialog.Trigger
+				>
+				<AlertDialog.Content>
+					<AlertDialog.Header>
+						<AlertDialog.Title>Essa ação não pode ser desfeita, você tem certeza?</AlertDialog.Title
+						>
+						<AlertDialog.Description>
+							This action cannot be undone. This will permanently delete your account and remove
+							your data from our servers.
+						</AlertDialog.Description>
+					</AlertDialog.Header>
+					<AlertDialog.Footer>
+						<AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
+						<Button
+							on:click={() => {
+								console.log('click');
+
+								updateStatus('Entregue', id);
+							}}
+						>
+							Continuar
+						</Button>
+					</AlertDialog.Footer>
+				</AlertDialog.Content>
+			</AlertDialog.Root>
+
 			<Button
 				class="font-bold  cursor-pointer flex items-center space-x-2 bg-yellow-500 rounded-2xl p-3"
 				on:click={() => {
-					// updateStatus('Em Preparo', pedido.id);
+					updateStatus('Em Preparo', id);
 				}}>Preparando</Button
 			>
 
 			<Button
 				class="font-bold  cursor-pointer flex items-center space-x-2 bg-red-500 rounded-2xl p-3"
-				>Cancelado</Button
+				on:click={() => {
+					updateStatus('Cancelado', id);
+				}}>Cancelado</Button
 			>
 		</div>
 	</Card.Content>
