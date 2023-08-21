@@ -6,8 +6,9 @@
 	import { Collection, collectionStore, docStore } from 'sveltefire';
 
 	import { collection, doc, query, where } from 'firebase/firestore';
-	import { clienteAuthStore, firestore } from '$lib/firebase';
+	import { clienteAuthStore, firestore, user } from '$lib/firebase';
 	import type { Cliente, Pedido } from '$lib/firebase-types';
+	import FormCheckOut from '$lib/forms/admin/FormCheckOut.svelte';
 	// import QRcodeAlert from '$lib/QRcodeAlert.svelte';
 
 	export let data: PageData;
@@ -38,9 +39,19 @@
 </script>
 
 <main class="flex flex-col">
-    {#if $cliente}
-         <CardCliente cliente={$cliente} />
-    {/if}
+	{#if $cliente}
+		<div class="flex justify-evenly">
+			<CardCliente cliente={$cliente} />
+			{#if $cliente && $user?.email && cliente.ref}
+				<FormCheckOut
+					pedidos={pedidosEntregues}
+					id_admin={$user?.email}
+					cliente={$cliente}
+					id_cliente={cliente.ref}
+				/>
+			{/if}
+		</div>
+	{/if}
 	{#if pedidosEntregues.length > 0}
 		<p class="m-3 p-2 text-center text-lg text-white mt-10 bg-slate-700 rounded-sm">
 			Pedidos Entregues
