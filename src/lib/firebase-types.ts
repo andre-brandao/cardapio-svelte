@@ -10,6 +10,7 @@ export interface Produto {
     vegano: boolean;
     visivel: boolean;
     url?: string;
+    ingredientes?: Ingrediente[];
 }
 
 export interface Cardapio {
@@ -75,10 +76,10 @@ export interface CheckOut{
 
 export interface Estoque{
     id?:string;
-    items:Ingreditente[];
+    items:Ingrediente[];
 }
 
-export interface Ingreditente{
+export interface Ingrediente{
     id:string;
     nome:string;
     quantidade:number;
