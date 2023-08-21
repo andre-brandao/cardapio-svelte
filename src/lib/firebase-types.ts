@@ -1,5 +1,9 @@
 import type { Timestamp } from "firebase/firestore";
-
+export interface IngredProduto{
+    id:string;
+    nome:string;
+    quantidade:number;
+}
 export interface Produto {
     id?: string;
     nome: string;
@@ -10,7 +14,7 @@ export interface Produto {
     vegano: boolean;
     visivel: boolean;
     url?: string;
-    ingredientes?: Ingrediente[];
+    ingredientes?: IngredProduto[];
 }
 
 export interface Cardapio {

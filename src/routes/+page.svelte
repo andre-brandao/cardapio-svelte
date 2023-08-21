@@ -22,7 +22,7 @@
 
 	$: input_exists =
 		estoque.some((item) => item.nome == input.nome) &&
-		!produtos_add.some((item) => item.nome == input);
+		!produtos_add.some((item) => item.nome == input.nome);
 
 	let produtos_add: any[] = [];
 </script>
