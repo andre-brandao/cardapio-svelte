@@ -21,7 +21,7 @@
 				/>
 			</div>
 
-			<nav class="bg-muted rounded-sm m-3 p-2 flex items-center space-x-4 lg:space-x-6">
+			<nav class="bg-muted rounded-sm m-3 p-2 flex items-center  overflow-auto space-x-4 lg:space-x-6">
 				{#if data?.cadastrar_clientes}
 					<a
 						href="/admin/clientes"
