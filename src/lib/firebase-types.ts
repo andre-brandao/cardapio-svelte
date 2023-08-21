@@ -73,15 +73,15 @@ export interface CheckOut{
 }
 
 
-// export interface Estoque{
-//     id?:string;
-//     items:Ingreditente[];
-// }
+export interface Estoque{
+    id?:string;
+    items:Ingreditente[];
+}
 
-// interface Ingreditente{
-//     id:string;
-//     nome:string;
-//     quantidade:number;
-//     unidadeMedida:string;
-//     preco:number;
-// }
+export interface Ingreditente{
+    id:string;
+    nome:string;
+    quantidade:number;
+    unidadeMedida:string;
+    preco:number;
+}

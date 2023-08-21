@@ -3,7 +3,7 @@ import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 import { docStore, userStore } from 'sveltefire';
-import type { Cardapio, Cliente } from './firebase-types';
+import type { Cardapio, Cliente, Estoque } from './firebase-types';
 const firebaseConfig = {
 	apiKey: 'AIzaSyCU6unky6XBxRi5L48KNI48rhFM6FTiPnw',
 
@@ -31,15 +31,9 @@ export const clienteAuthStore = docStore<Cliente>(firestore, 'clientes/1');
 
 export const cardapioStore = docStore<Cardapio>(firestore, 'cardapios/sHs73YG49ZMXJMoeQPzv');
 
-export interface PermsAdmin {
-	uid: string;
-	email: string;
-	editar_produtos: boolean;
-	cadastrar_clientes: boolean;
-	controle_estoque: boolean;
-	editar_permissoes: boolean;
-	alterar_pedidos: boolean;
-}
+export const estoqueStore = docStore<Estoque>(firestore, 'estoque/tdbPcjuGT28D34MYzDvc');
+
+
 
 // signInAnonymously(auth).then(() => {
 //     console.log('logado');
