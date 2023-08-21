@@ -34,7 +34,6 @@ export const cardapioStore = docStore<Cardapio>(firestore, 'cardapios/sHs73YG49Z
 export const estoqueStore = docStore<Estoque>(firestore, 'estoque/tdbPcjuGT28D34MYzDvc');
 
 
-
 // signInAnonymously(auth).then(() => {
 //     console.log('logado');
 // }).catch((error) => {

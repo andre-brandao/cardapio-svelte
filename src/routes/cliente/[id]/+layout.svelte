@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { docStore } from 'sveltefire';
 	import type { LayoutData } from './$types';
-	import { firestore } from '$lib/firebase';
+	import { clienteAuthStore, firestore } from '$lib/firebase';
 	import type { Cliente } from '$lib/firebase-types';
 	import Loading from '$lib/Loading.svelte';
 	import AnimatedRoute from '$lib/AnimatedRoute.svelte';
@@ -20,7 +20,7 @@
 		alt=""
 	/>
 
-	<p class="mr-5 mt-7 text-white">Ola,{$cliente?.nome}</p>
+	<p class="mr-5 mt-7">Ola,{$cliente?.nome}</p>
 </div>
 
 {#if $cliente}
@@ -31,7 +31,7 @@
 	>
 		<a
 			class="{$page.route.id === '/cliente/[id]/pedidos'
-				? 'bg-background text-white'
+				? 'bg-primary '
 				: 'bg-slate-200'} p-2 rounded-sm"
 			href="/cliente/{data.identificador}/pedidos"
 		>
@@ -40,7 +40,7 @@
 
 		<a
 			class="{$page.route.id === '/cliente/[id]/cardapio'
-				? 'bg-background text-white'
+				? 'bg-primary '
 				: 'bg-slate-200'} p-2 rounded-sm"
 			href="/cliente/{data.identificador}/cardapio"
 		>
@@ -49,7 +49,7 @@
 	</nav>
 
 	<AnimatedRoute>
-		<slot />
+		<slot {cliente}/>
 	</AnimatedRoute>
 {:else}
 	<!-- else content here -->

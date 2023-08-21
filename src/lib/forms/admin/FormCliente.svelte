@@ -118,7 +118,7 @@
 		</div>
 		<Dialog.Footer>
 			<Button
-				type="submit"
+				variant="outline"
 				on:click={() => {
 					cadastrar_cliente();
 					// console.log(action);

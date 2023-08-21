@@ -33,14 +33,6 @@
 		};
 		console.log(checkOut);
 		const check_collection = collection(firestore, `check_out`);
-		// const data = {
-		// 	created: current_time,
-		// 	nome: input.name,
-		// 	telefone: input.telefone,
-		// 	mesa: input.mesa,
-		// 	pagou: false
-		// };
-		// const clienteColl = await collection(firestore, `clientes`);
 
 		await updateDoc(id_cliente, { pagou: true, mesa: '', comanda_ativa: '' });
 		const doc = await addDoc(check_collection, checkOut);
