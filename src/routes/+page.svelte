@@ -3,37 +3,69 @@
 	import * as Tabs from '$lib/components/ui/tabs';
 
 	import CardProduto from '$lib/cards/CardProduto.svelte';
-	import { cardapioStore } from '$lib/firebase';
+	import { cardapioStore, estoqueStore } from '$lib/firebase';
+	import Button from '$lib/components/ui/button/button.svelte';
+	import { Input } from '$lib/components/ui/input';
+	import { Label } from '$lib/components/ui/label';
 
-	$: produtos_array = $cardapioStore?.produtos ?? [];
+	let input = {
+		nome: '',
+		quantidade: 0
+	};
 
-	$: categorias = [...new Set(produtos_array.map((prod) => prod.categoria))];
-	$: {
-		console.log(categorias);
-	}
-	function produtosFrom(categoria: string) {
-		return produtos_array.filter((prod) => prod.categoria == categoria);
-	}
+	$: console.log(input);
 
-	let selected = 'Bebida';
+	let produtos = $cardapioStore?.produtos ?? [];
+	let estoque = $estoqueStore?.items ?? [];
+
+	export let produto_selecionado = produtos[0];
+
+	$: input_exists =
+		estoque.some((item) => item.nome == input.nome) &&
+		!produtos_add.some((item) => item.nome == input);
+
+	let produtos_add: any[] = [];
 </script>
 
-<Tabs.Root value="account" class="w-[400px]">
-	<div class="sticky top-0 z-10 p-2 bg-background">
-		<Tabs.List class="flex overflow-y-scroll">
-			{#each categorias as categoria}
-				<Tabs.Trigger value={categoria}>{categoria}</Tabs.Trigger>
-			{/each}
-		</Tabs.List>
-	</div>
-	{#each categorias as categoria}
-		<Tabs.Content value={categoria}>
-			{categoria}
-			{#each produtosFrom(categoria) as produto}
-			<CardProduto {produto} /> 
-			{/each}
+<!-- show produto selecionado -->
+{#if produto_selecionado}
+	<div class="flex">
+		<Card class="w-40">
+			<CardProduto produto={produto_selecionado} />
+		</Card>
 
-		
-		</Tabs.Content>
-	{/each}
-</Tabs.Root>
+		{#each produtos_add ?? [] as item}
+			<p>{item.nome}</p>
+		{/each}
+	</div>
+{/if}
+{#each produtos_add as prod, i}
+	<div>
+		<div class="grid grid-cols-3 items-center gap-4">
+			<Label class="text-right">{i}={prod.nome}</Label>
+
+			<Button
+				on:click={() => {
+					produtos_add = produtos_add.filter((item) => item.nome !== prod.nome);
+				}}>🗑️</Button
+			>
+		</div>
+	</div>
+{/each}
+<div class="grid grid-cols-4 items-center gap-4">
+	<Label class="text-right" for="name">Nome</Label>
+	<Input id="name" bind:value={input.nome} class="col-span-2 bg-accent" placeholder="Farinha" />
+	<Input id="quant" bind:value={input.quantidade} class=" bg-accent" placeholder="0" />
+</div>
+<Button
+	on:click={() => {
+		const produto = estoque.find((item) => item.nome === input.nome);
+		if (produto && !produtos_add.some((item) => item.nome === input)) {
+			produtos_add = [...produtos_add, produto];
+		}
+		console.log(produto);
+	}}
+	disabled={!input_exists}
+>
+	add one
+</Button>

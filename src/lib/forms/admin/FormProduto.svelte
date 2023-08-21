@@ -150,30 +150,9 @@
 		const url = await getDownloadURL(result.ref);
 		$formData.url = url;
 		console.log('upload concluido' + url);
-
-		// const cardRef = cardapioStore.ref;
-		// const prods = $cardapioStore?.produtos;
-		// if (prods == undefined || cardRef == undefined) {
-		// 	console.log('produtos undefined erro ao salvar url');
-		// 	return;
-		// }
-		// prods.forEach((p) => {
-		// 	if (p.id == idProduto) {
-		// 		p.url = url;
-		// 	}
-		// });
-		// await updateDoc(cardRef, {
-		// 	produtos: prods
-		// });
-		// console.log('Produto editado com sucesso');
-		// // await updateDoc(doc(firestore, 'users', $user!.uid), { photoURL: url });
-		// uploading = false;
 	}
 
-	// 	let file;
-	// 	function chooseFile(e) {
-	//     file = e.target.files[0];
-	//   }
+
 </script>
 
 <Dialog.Root>

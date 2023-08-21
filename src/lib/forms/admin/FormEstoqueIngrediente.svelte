@@ -6,7 +6,7 @@
 	import { Switch } from '$lib/components/ui/switch';
 	import { Textarea } from '$lib/components/ui/textarea';
 	import { cardapioStore, storage, estoqueStore } from '$lib/firebase';
-	import type { Ingreditente, Produto } from '$lib/firebase-types';
+	import type { Ingrediente, Produto } from '$lib/firebase-types';
 	import { updateDoc, arrayUnion } from 'firebase/firestore';
 	import { getFirebaseContext } from 'sveltefire';
 
@@ -19,7 +19,7 @@
 
 	export let action = 'create';
 
-	export let dfIngrediente: Ingreditente = {
+	export let dfIngrediente: Ingrediente = {
 		id: '',
 		nome: '',
 

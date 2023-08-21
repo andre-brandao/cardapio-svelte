@@ -10,19 +10,24 @@
 	import { cardapioStore, estoqueStore } from '$lib/firebase';
 	import FormEstoqueIngrediente from '$lib/forms/admin/FormEstoqueIngrediente.svelte';
 	import FormProduto from '$lib/forms/admin/FormProduto.svelte';
-
-	$: produtos = $cardapioStore?.produtos ?? [];
-    $: ingredientes = $estoqueStore?.items ?? [];
+	import * as Table from '$lib/components/ui/table';
+	import Checkbox from '$lib/components/ui/checkbox/checkbox.svelte';
+	import type { Ingrediente } from '$lib/firebase-types';
+	
+	$: ingredientes = $estoqueStore?.items ?? [];
 	let barra_pesquisa = '';
+
+
+	let ingredientes_selecionados:Ingrediente[] = [];
+	$:console.log(ingredientes_selecionados);
+	
 </script>
 
 <main class="flex flex-col">
 	<div class="sticky top-0 z-10 p-2 bg-background">
 		<div class="flex flex-row items-center gap-3">
 			<FormEstoqueIngrediente action={'create'}>
-				<Button class="ml-1 hover:bg-blue-300">
-					+ Cadastrar Produto
-				</Button>
+				<Button class="ml-1 hover:bg-blue-300">+ Cadastrar Produto</Button>
 			</FormEstoqueIngrediente>
 			<div class="grid grid-cols-4 items-center">
 				<Label class="font-bold">Pesquisar:</Label>
@@ -36,14 +41,32 @@
 		</div>
 	</div>
 
-	<div class="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))]">
-		{#each ingredientes as produto}
+	
+	<Table.Root>
+		<Table.Caption>A list of your recent invoices.</Table.Caption>
+		<Table.Header>
+			<Table.Row>
+				<Table.Head class="w-[100px]">Nome</Table.Head>
+				<Table.Head>Quant</Table.Head>
+				<Table.Head>Preco por un</Table.Head>
+				<Table.Head class="text-right">Amount</Table.Head>
+			</Table.Row>
+		</Table.Header>
+		<Table.Body>
+			{#each ingredientes as produto, i (produto.id)}
+				<Table.Row>
+					<FormEstoqueIngrediente action={'update'} dfIngrediente={produto}>
+						<Table.Cell class="font-medium">{produto.nome}</Table.Cell>
+					</FormEstoqueIngrediente>
+					<Table.Cell>{produto.quantidade}{produto.unidadeMedida}</Table.Cell>
+					<Table.Cell>R${produto.preco} por {produto.unidadeMedida}</Table.Cell>
+					<Table.Cell class="text-right">
+					placeholder
 
-        <FormEstoqueIngrediente action={"update"} dfIngrediente={produto}>
+					</Table.Cell>
+				</Table.Row>
+			{/each}
+		</Table.Body>
+	</Table.Root>
 
-            <CardIngrediente ingrediente={produto} />
-
-        </FormEstoqueIngrediente>
-        {/each}
-	</div>
 </main>

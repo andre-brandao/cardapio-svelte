@@ -1,8 +1,8 @@
 <script lang="ts">
 	import * as Card from '$lib/components/ui/card';
-	import type { Ingreditente } from '$lib/firebase-types';
+	import type { Ingrediente } from '$lib/firebase-types';
 
-	export let ingrediente: Ingreditente = {
+	export let ingrediente: Ingrediente = {
 		id: '',
 		nome: 'Produto',
 		quantidade: 0,
