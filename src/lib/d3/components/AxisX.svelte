@@ -1,6 +1,6 @@
 <script>
     //@ts-nocheck
-    let xTicks = [0,25,50,75,100,120]
+    let xTicks = [0,25,50,75,100]
 
     export let height;
     export let margin;

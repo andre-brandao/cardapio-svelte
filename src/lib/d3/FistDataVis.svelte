@@ -51,7 +51,7 @@
 							r={hoverData && hoverData == student ? "20" : "10"}
 							opacity={hoverData ? hoverData == student ? "1" : "0.5" : "1"}
 
-                            fill="purple"
+                            fill="blue"
                             on:mouseover={() => {
                                 hoverData = student;
                             }}
