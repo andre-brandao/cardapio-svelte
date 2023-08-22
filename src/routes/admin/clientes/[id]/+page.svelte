@@ -9,6 +9,7 @@
 	import { clienteAuthStore, firestore, user } from '$lib/firebase';
 	import type { Cliente, Pedido } from '$lib/firebase-types';
 	import FormCheckOut from '$lib/forms/admin/FormCheckOut.svelte';
+	import QRcode from '$lib/QRcode.svelte';
 	// import QRcodeAlert from '$lib/QRcodeAlert.svelte';
 
 	export let data: PageData;
@@ -49,6 +50,7 @@
 					cliente={$cliente}
 					id_cliente={cliente.ref}
 				/>
+				<QRcode value={`https://cafedavilla.vercel.app/cliente/${cliente.ref.id}/cardapio`}>abrir qr code</QRcode>
 			{/if}
 		</div>
 	{/if}

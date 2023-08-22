@@ -48,6 +48,8 @@
 			{/each}
 		</Tabs.Root>
 	</main>
+
+	<span class="row-span-3"></span>
 {:else}
 	<Loading />
 {/if}

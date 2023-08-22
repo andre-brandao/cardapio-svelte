@@ -104,4 +104,6 @@
 			</Table.Body>
 		</Table.Root>
 	{/if}
+
+	<span class="row-span-3"></span>
 </main>
