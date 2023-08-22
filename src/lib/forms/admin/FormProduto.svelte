@@ -287,10 +287,10 @@
 			<Tabs.Content value="ingredientes">
 				<div class="grid gap-4 py-4">
 					{#each ingredientes_add as prod, i}
-						<div class="grid grid-cols-3 items-center gap-4">
-							<Label class="text-right">{i} = {prod.nome} {prod.quantidade}</Label>
+						<div class="grid grid-cols-2 items-center gap-4 justify-center">
+							<Label class="justify-self-end">{prod.nome} {prod.quantidade}</Label>
 
-							<Button
+							<Button class="justify-self-start"
 								on:click={() => {
 									ingredientes_add = ingredientes_add.filter((item) => item.nome !== prod.nome);
 								}}>🗑️</Button
