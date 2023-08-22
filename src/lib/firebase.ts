@@ -2,8 +2,8 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
-import { docStore, userStore } from 'sveltefire';
-import type { Cardapio, Cliente, Estoque } from './firebase-types';
+import { collectionStore, docStore, userStore } from 'sveltefire';
+import type { Cardapio, Cliente, Estoque, Pedido } from './firebase-types';
 const firebaseConfig = {
 	apiKey: 'AIzaSyCU6unky6XBxRi5L48KNI48rhFM6FTiPnw',
 
@@ -33,9 +33,4 @@ export const cardapioStore = docStore<Cardapio>(firestore, 'cardapios/sHs73YG49Z
 
 export const estoqueStore = docStore<Estoque>(firestore, 'estoque/tdbPcjuGT28D34MYzDvc');
 
-
-// signInAnonymously(auth).then(() => {
-//     console.log('logado');
-// }).catch((error) => {
-//     console.log(error);
-// });
+export const pedidosStore = collectionStore<Pedido>(firestore, 'pedidos');

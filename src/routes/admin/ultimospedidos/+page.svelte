@@ -58,3 +58,6 @@
 		<CardPedido {pedido} id={pedido.id ?? ''} />
 	{/each}
 </div>
+<!-- {#if pedidos}
+	 <TesteChart pedidos={pedidos}/>
+{/if} -->

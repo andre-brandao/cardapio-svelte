@@ -1,6 +1,5 @@
 <script>
 	//@ts-nocheck
-	import * as HoverCard from '$lib/components/ui/hover-card';
 	import data from './data/data.js';
     import AxisX from './components/AxisX.svelte';
     import AxisY from './components/AxisY.svelte';
