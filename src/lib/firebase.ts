@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { collection, getFirestore, limit, orderBy, query } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 import { collectionStore, docStore, userStore } from 'sveltefire';
@@ -33,4 +33,7 @@ export const cardapioStore = docStore<Cardapio>(firestore, 'cardapios/sHs73YG49Z
 
 export const estoqueStore = docStore<Estoque>(firestore, 'estoque/tdbPcjuGT28D34MYzDvc');
 
-export const pedidosStore = collectionStore<Pedido>(firestore, 'pedidos');
+const pediRef = collection(firestore, 'pedidos');
+//@ts-ignore
+const q = query<Pedido>(pediRef, orderBy('created'));
+export const pedidosStore = collectionStore<Pedido>(firestore, q);

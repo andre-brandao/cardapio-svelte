@@ -5,10 +5,11 @@
 	export let xScale;
 </script>
 
-<div style="position: absolute; top: {yScale(data.hours)}px; left: {xScale(data.grade)}px;">
+<div style="position: absolute; top: {yScale(data.y)}px; left: {xScale(data.x)}px;">
 	<p class='font-bold'>{data.name}</p>
+    <!-- <p>{data.x}</p> -->
+    <p>Total Pedidos:{data.y}</p>
 
-	<p>{data.grade}</p>
 </div>
 
 <style>
