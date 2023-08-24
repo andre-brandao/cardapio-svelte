@@ -49,6 +49,7 @@
 </script>
 
 {#if data}
+<h1>Exemplo total pedidos por produto</h1>
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
 		class="chart-container"
