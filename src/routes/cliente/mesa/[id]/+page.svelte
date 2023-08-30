@@ -25,9 +25,9 @@
 </Card.Root>
 <a href={`/cardapio`}>
    
-    <Card.Root class="m-4 bg-transparent text-white">
+    <Card.Root class="m-4 bg-transparent">
         <Card.Header class="text-center">
-            <Card.Title>Cardapio</Card.Title>
+            <Card.Title>Cardapio Estatico</Card.Title>
         </Card.Header>
     </Card.Root>
 </a>

@@ -18,17 +18,16 @@
 
 <main class="flex flex-col">
 	<Tabs.Root value={categorias[0]}>
-		<div class="sticky top-0 z-10 p-2 bg-background">
-			<Tabs.List class="flex overflow-y-scroll">
+		<Tabs.List class="flex overflow-y-scroll">
+			<div class="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))]">
 				{#each categorias as categoria}
 					<Tabs.Trigger class="font-bold" value={categoria}>{categoria}</Tabs.Trigger>
 				{/each}
-			</Tabs.List>
-		</div>
+			</div>
+		</Tabs.List>
 
 		{#each categorias as categoria}
 			<Tabs.Content value={categoria}>
-
 				{#each produtosFrom(categoria) as produto}
 					<CardProduto {produto} />
 				{/each}

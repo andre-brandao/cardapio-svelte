@@ -7,6 +7,7 @@
 	import { docStore } from 'sveltefire';
 	import type { PageData } from './$types';
 	import Loading from '$lib/Loading.svelte';
+	import { DeviceMockup } from 'flowbite-svelte';
 
 	//
 	export let data: PageData;
@@ -26,30 +27,34 @@
 	let selected = 'Bebida';
 </script>
 
-{#if $cliente && $cliente.mesa != ''  }
-	<main class="flex flex-col">
-		<Tabs.Root value={categorias[0]}>
-			<div class="sticky top-0 z-10 p-2 bg-background">
-				<Tabs.List class="flex overflow-y-scroll">
-					{#each categorias as categoria}
-						<Tabs.Trigger class="font-bold" value={categoria}>{categoria}</Tabs.Trigger>
-					{/each}
-				</Tabs.List>
-			</div>
+<DeviceMockup>
+	{#if $cliente && $cliente.mesa != ''}
+		<main class="flex flex-col">
+			<Tabs.Root value={categorias[0]}>
+				<div class="sticky top-0 z-10 p-2 bg-background">
+					<Tabs.List class="flex overflow-y-scroll">
+						{#each categorias as categoria}
+							<Tabs.Trigger class="font-bold" value={categoria}>{categoria}</Tabs.Trigger>
+						{/each}
+					</Tabs.List>
+				</div>
 
-			{#each categorias as categoria}
-				<Tabs.Content value={categoria}>
-					{#each produtosFrom(categoria) as produto}
-						<FormPedido {produto} cliente={$cliente} id={cliente.id}>
-							<CardProduto {produto} />
-						</FormPedido>
-					{/each}
-				</Tabs.Content>
-			{/each}
-		</Tabs.Root>
-	</main>
+				{#each categorias as categoria}
+					<Tabs.Content value={categoria}>
+						<div class="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))]">
+							{#each produtosFrom(categoria) as produto}
+								<FormPedido {produto} cliente={$cliente} id={cliente.id}>
+									<CardProduto {produto} />
+								</FormPedido>
+							{/each}
+						</div>
+					</Tabs.Content>
+				{/each}
+			</Tabs.Root>
+		</main>
 
-	<span class="row-span-3"></span>
-{:else}
-	<Loading />
-{/if}
+		<span class="row-span-3" />
+	{:else}
+		<Loading />
+	{/if}
+</DeviceMockup>

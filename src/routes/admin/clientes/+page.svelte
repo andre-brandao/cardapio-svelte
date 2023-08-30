@@ -4,11 +4,12 @@
 	import { Button } from '$lib/components/ui/button';
 	import { firestore } from '$lib/firebase';
 	import { collection, query, where } from 'firebase/firestore';
-    import type { Cliente } from '$lib/firebase-types';
+	import type { Cliente } from '$lib/firebase-types';
 	import CardCliente from '$lib/cards/admin/CardCliente.svelte';
 	import { collectionStore } from 'sveltefire';
 	import Label from '$lib/components/ui/label/label.svelte';
 	import { Input } from '$lib/components/ui/input';
+	import { DeviceMockup } from 'flowbite-svelte';
 	// export let data: PageData;
 
 	let today = new Date();
@@ -27,30 +28,27 @@
 	// $: mesas = new Set($clientes.map((cliente) => cliente.mesa));
 	let barra_pesquisa = '';
 </script>
-<main>
-    <div class="flex flex-row items-center gap-3">
 
-
-        <FormCliente>
-            <Button class="ml-1">+ Cadastrar Cliente</Button>
-        </FormCliente>
-        <div class="grid grid-cols-4 items-center">
-            <Label class="font-bold">Pesquisar:</Label>
-            <Input
-                id="name"
-                bind:value={barra_pesquisa}
-                class="col-span-3 bg-accent"
-                placeholder="Nome/Mesa"
-            />
-        </div>
-    </div>
-    <div class="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4">
-	
-		{#each $clientes ?? [] as cliente}
-			<a href={`/admin/clientes/${cliente.id}`}>
-				<CardCliente {cliente} />
-			</a>
-		{/each}
-	</div>
-
-</main>
+	<main>
+		<div class="flex flex-row items-center gap-3">
+			<FormCliente>
+				<Button class="ml-1">+ Cadastrar Cliente</Button>
+			</FormCliente>
+			<div class="grid grid-cols-4 items-center">
+				<Label class="font-bold">Pesquisar:</Label>
+				<Input
+					id="name"
+					bind:value={barra_pesquisa}
+					class="col-span-3 bg-accent"
+					placeholder="Nome/Mesa"
+				/>
+			</div>
+		</div>
+		<div class="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4">
+			{#each $clientes ?? [] as cliente}
+				<a href={`/admin/clientes/${cliente.id}`}>
+					<CardCliente {cliente} />
+				</a>
+			{/each}
+		</div>
+	</main>
