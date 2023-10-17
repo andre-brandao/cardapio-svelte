@@ -26,7 +26,7 @@
 					<a
 						href="/admin/clientes"
 						class="{$page.route.id == '/admin/clientes'
-							? 'bg-background p-1'
+							? 'bg-background text-white p-1'
 							: ' bg-muted text-muted-foreground'} rounded-sm px-1 font-bold transition-colors hover:text-primary"
 					>
 						Comandas
@@ -36,7 +36,7 @@
 					<a
 						href="/admin/produtos"
 						class="{$page.route.id == '/admin/produtos'
-							? 'bg-background p-1'
+							? 'bg-background text-white p-1'
 							: ' bg-muted text-muted-foreground'} rounded-sm p-1 font-bold transition-colors hover:text-primary"
 					>
 						Produtos
@@ -47,7 +47,7 @@
 					<a
 						href="/admin/ultimospedidos"
 						class="{$page.route.id == '/admin/ultimospedidos'
-							? 'bg-background p-1'
+							? 'bg-background text-white p-1'
 							: ' bg-muted text-muted-foreground'} rounded-sm px-1 font-bold transition-colors hover:text-primary"
 					>
 						Ultimos Pedidos
@@ -57,7 +57,7 @@
 					<a
 						href="/admin/estoque"
 						class="{$page.route.id == '/admin/estoque'
-							? 'bg-background p-1'
+							? 'bg-background text-white p-1'
 							: ' bg-muted text-muted-foreground'} rounded-sm px-1 font-bold transition-colors hover:text-primary"
 					>
 						Estoque
@@ -68,7 +68,7 @@
 					<a
 						href="/admin/perms"
 						class="{$page.route.id == '/admin/perms'
-							? 'bg-background p-1'
+							? 'bg-background text-white p-1'
 							: ' bg-muted text-muted-foreground'} rounded-sm px-1 font-bold transition-colors hover:text-primary"
 					>
 						Permissoes Funcionarios
