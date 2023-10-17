@@ -9,6 +9,8 @@
 	import { Label } from '$lib/components/ui/label';
 	import * as Select from '$lib/components/ui/select';
 
+	import { maskify } from 'svelte-maskify';
+
 	function generateUid(): string {
 		const timestamp = new Date().getTime().toString();
 		// const random = Math.random().toString(36).substring(2); // Generate a random alphanumeric string
@@ -107,13 +109,21 @@
 
 			<div class="grid grid-cols-4 items-center gap-4">
 				<Label class="text-right" for="telefone">Telefone</Label>
-				<Input
+				<input
+					type="tel"
+					id="telefone"
+					bind:value={$formData.telefone}
+					class="col-span-3 bg-accent flex h-10 w-full rounded-md border border-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+					placeholder="(31) 98765-4321"
+					use:maskify={'(99) 99999-9999'}
+				/>
+				<!-- <Input
 					type="tel"
 					id="telefone"
 					bind:value={$formData.telefone}
 					class="col-span-3 bg-accent"
 					placeholder="(31) 98765-4321"
-				/>
+				/> -->
 			</div>
 		</div>
 		<Dialog.Footer>
