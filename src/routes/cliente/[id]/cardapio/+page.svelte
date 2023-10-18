@@ -32,7 +32,7 @@
 			<div class="sticky top-0 z-10 p-2 bg-background">
 				<Tabs.List class="flex overflow-y-scroll">
 					{#each categorias as categoria}
-						<Tabs.Trigger class="font-bold" value={categoria}>{categoria}</Tabs.Trigger>
+						<Tabs.Trigger class="font-bold data-[state=active]:text-white" value={categoria}>{categoria}</Tabs.Trigger>
 					{/each}
 				</Tabs.List>
 			</div>

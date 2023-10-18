@@ -35,7 +35,7 @@
 {#if $clientes}
 	<div class="text-center font-bold">Faça seu Pedido:</div>
 	{#each $clientes as cliente}
-		<a href={`/cliente/${cliente.id}/pedidos`}>
+		<a href={`/cliente/${cliente.id}/cardapio`}>
 			<Card.Root class="m-2">
 				<Card.Header class="text-center">
 					<Card.Title>{cliente.nome}</Card.Title>
