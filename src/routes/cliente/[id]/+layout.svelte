@@ -27,12 +27,12 @@
 	<!-- content here -->
 
 	<nav
-		class="fixed bottom-0 left-0 right-0 bg-white flex justify-around items-center h-16 shadow-md z-10"
+		class="fixed bottom-0 left-0 right-0 bg-muted flex justify-around items-center h-16 shadow-md z-10"
 	>
 		<a
 			class="{$page.route.id === '/cliente/[id]/pedidos'
-				? 'bg-primary '
-				: 'bg-slate-200'} p-2 rounded-sm"
+				? 'bg-background text-white  font-bold'
+				: 'bg-[url(static/logo.svg)] text-background font-bold'} p-2 rounded-sm"
 			href="/cliente/{data.identificador}/pedidos"
 		>
 			Pedidos
@@ -40,8 +40,8 @@
 
 		<a
 			class="{$page.route.id === '/cliente/[id]/cardapio'
-				? 'bg-primary '
-				: 'bg-slate-200'} p-2 rounded-sm"
+				? 'bg-background text-white font-bold'
+				: 'bg-[url(static/logo.svg)] text-background font-bold'} p-2 rounded-sm"
 			href="/cliente/{data.identificador}/cardapio"
 		>
 			Cardapio

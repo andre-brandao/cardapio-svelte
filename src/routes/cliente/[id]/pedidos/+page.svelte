@@ -42,7 +42,7 @@
          <CardCliente cliente={$cliente} />
     {/if}
 	{#if pedidosEntregues.length > 0}
-		<p class="m-3 p-2 text-center text-lg text-white mt-10 bg-slate-700 rounded-sm">
+		<p class="m-3 p-2 text-center text-lg text-background font-bold mt-10 bg-secondary rounded-sm">
 			Pedidos Entregues
 		</p>
 
@@ -70,7 +70,7 @@
 	{/if}
 
 	{#if pedidosPendentes.length > 0}
-		<p class="m-3 p-2 text-center text-lg text-white mt-10 bg-slate-700 rounded-sm">
+		<p class="m-3 p-2 text-center text-lg text-background font-bold mt-10 bg-secondary rounded-sm">
 			Pedidos Pendentes
 		</p>
 
@@ -80,7 +80,7 @@
 					<Table.Head class="">Produto</Table.Head>
 					<Table.Head>Status</Table.Head>
 					<Table.Head>Quant</Table.Head>
-					<Table.Head class="text-right">Total:R${total.toFixed(2)}</Table.Head>
+					<Table.Head class="text-right">Preço</Table.Head>
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>
@@ -98,12 +98,12 @@
 						<Table.Cell class="font-medium">{pedido.produto.nome}</Table.Cell>
 						<Table.Cell>{pedido.status}</Table.Cell>
 						<Table.Cell>{pedido.quantidade}</Table.Cell>
-						<Table.Cell class="text-right">{pedido.produto.preco}</Table.Cell>
+						<Table.Cell class="text-right">R$ {pedido.produto.preco}</Table.Cell>
 					</Table.Row>
 				{/each}
 			</Table.Body>
 		</Table.Root>
 	{/if}
 
-	<span class="row-span-3"></span>
+	<span class="row-span-3 mb-20"/>
 </main>
