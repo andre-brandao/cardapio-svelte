@@ -1,8 +1,4 @@
-<script>
 
-	import FistDataVis from "$lib/d3/FistDataVis.svelte";
-
-</script>
 
 <nav class="gap-1">
 	<a  class="text-white" href="/cardapio">Cardapio</a>
@@ -12,12 +8,3 @@
 </nav>
 
 
-
-<FistDataVis/>
-<!-- 
-<Timeline
-	data={data.timeline}
-	xAccessor={dateAccessor}
-	yAccessor={temperatureAccessor}
-	label="Vendas"
-/> -->
