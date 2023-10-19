@@ -42,14 +42,14 @@
 	</div>
 
 	
-	<Table.Root>
+	<Table.Root class='text-white'>
 		<Table.Caption>A list of your recent invoices.</Table.Caption>
 		<Table.Header>
-			<Table.Row>
-				<Table.Head class="w-[100px]">Nome</Table.Head>
-				<Table.Head>Quant</Table.Head>
-				<Table.Head>Preco por un</Table.Head>
-				<Table.Head class="text-right">Amount</Table.Head>
+			<Table.Row class='text-white'>
+				<Table.Head class="w-[100px] text-white">Nome</Table.Head>
+				<Table.Head class='text-white'>Quant</Table.Head>
+				<Table.Head class='text-white'>Preco por un</Table.Head>
+				<Table.Head class="text-right text-white">Amount</Table.Head>
 			</Table.Row>
 		</Table.Header>
 		<Table.Body>
