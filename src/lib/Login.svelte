@@ -20,7 +20,7 @@
 			id: user.user.uid,
 			email: user.user.email?? "",
 			editar_produtos: false,
-			cadastrar_clientes: true,
+			cadastrar_clientes: false,
 			alterar_pedidos: false,
 			controle_estoque: false,
 			editar_permissoes: false

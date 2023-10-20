@@ -4,6 +4,10 @@ function getIdString(id: string): string {
       ['QGRo1', 'Quarto 1'],
       ['QVRc2', 'Quarto 2'],
       ['Q81s3', 'Quarto 3'],
+      ['C9Zt4', 'Chale 1'],
+      ['C1Zt5', 'Chale 2'],
+      ['C2Zt6', 'Chale 3'],
+      ['C3Zt7', 'Chale 4'],
     ]);
     
     return idMap.get(id) || 'Invalid ID';

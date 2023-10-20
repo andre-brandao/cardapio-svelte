@@ -59,7 +59,7 @@
 			</FormProduto>
 			{/each} -->
 
-		{#each categorias as categoria}
+		{#each categorias as categoria  (categoria)}
 			<Tabs.Content value={categoria}>
 				<div class="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))]">
 					{#each produtosFrom(categoria) as produto}

@@ -80,7 +80,7 @@
 					placeholder="Arquiteclinio"
 				/>
 			</div>
-			<div class="grid grid-cols-4 items-center gap-4">
+			<!-- <div class="grid grid-cols-4 items-center gap-4">
 				<Label class="text-right" for="mesa">Mesa</Label>
 				<Input
 					id="mesa"
@@ -88,7 +88,28 @@
 					class="col-span-3 bg-accent"
 					placeholder="Chale 1"
 				/>
+			</div> -->
+
+			<div class="grid grid-cols-4 items-center gap-4">
+				<Label class="text-right" for="quarto">Quarto</Label>
+
+				<select
+					name="quarto"
+					id="quarto"
+					class="col-span-3 bg-accent flex h-10 w-full rounded-md border border-input px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+					bind:value={$formData.mesa}
+				>
+					<option value="Visitante">Visitante</option>
+					<option value="Suite 1">Suite 1</option>
+					<option value="Suite 2">Suite 2</option>
+					<option value="Suite 3">Suite 3</option>
+					<option value="Chale 1">Chale 1</option>
+					<option value="Chale 2">Chale 2</option>
+					<option value="Chale 3">Chale 3</option>
+					<option value="Chale 4">Chale 4</option>
+				</select>
 			</div>
+
 			<!-- 
 			<div class="grid grid-cols-4 items-center gap-4">
 				<Label class="text-right" for="mesa">Quarto</Label>

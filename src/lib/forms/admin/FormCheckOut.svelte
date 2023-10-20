@@ -42,9 +42,9 @@
 
 </script>
 
-<AlertDialog.Root>
-	<AlertDialog.Trigger class="bg-primary p-2 rounded-sm">CheckOut</AlertDialog.Trigger>
-	<AlertDialog.Content>
+<AlertDialog.Root >
+	<AlertDialog.Trigger  class="bg-primary p-2 rounded-sm">CheckOut</AlertDialog.Trigger>
+	<AlertDialog.Content class="text-white">
 		<AlertDialog.Header>
 			<AlertDialog.Title>Tem certeza que deseja realizar o checkout de {cliente.nome}</AlertDialog.Title>
 			<AlertDialog.Description>
