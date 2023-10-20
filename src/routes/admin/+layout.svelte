@@ -8,6 +8,42 @@
 	import { Doc, FirebaseApp, docStore } from 'sveltefire';
 	import type { PermsAdmin } from '$lib/firebase-types';
 	import { collection, doc, query, where } from 'firebase/firestore';
+	import { getDoc } from 'firebase/firestore';
+	import { onMount } from 'svelte';
+	import { redirect } from '@sveltejs/kit';
+	
+	// const permStore = docStore(firestore, `admin_permission/${$user!.uid}`);
+	
+	// onMount(async () => {
+
+	// 	if ($user) {
+		
+			
+	// 		if($page.route.id == '/admin/clientes' && $permStore.cadastrar_clientes == false){
+	// 			redirect(300,'/access-denied');
+	// 			console.log(page);
+	// 		}
+	// 		if ($page.route.id == '/admin/produtos' && $permStore.editar_produtos == false) {
+	// 			redirect(300,'/access-denied');
+	// 			console.log(page);
+	// 		}
+	// 		if ($page.route.id == '/admin/estoque' && $permStore.controle_estoque == false) {
+	// 			redirect(300,'/access-denied');
+	// 			console.log(page);
+	// 		}
+	// 		if ($page.route.id == '/admin/ultimospedidos' && $permStore.alterar_pedidos == false) {
+	// 			redirect(300,'/access-denied');
+	// 			console.log(page);
+	// 		}
+	// 		if ($page.route.id == '/admin/perms' && $permStore.editar_permissoes == false) {
+	// 			redirect(300,'/access-denied');
+	// 			console.log(page);
+	// 		}
+			
+	// 	}
+	// });
+
+
 </script>
 
 <FirebaseApp {firestore} {auth} {storage}>
@@ -63,7 +99,6 @@
 						Estoque
 					</a>
 				{/if}
-
 				{#if data?.editar_permissoes}
 					<a
 						href="/admin/perms"
@@ -74,6 +109,14 @@
 						Permissoes Funcionarios
 					</a>
 				{/if}
+				<a
+				href="/admin/quartos"
+				class="{$page.route.id == '/admin/quartos'
+					? 'bg-background text-white p-1'
+					: ' bg-muted text-muted-foreground'} rounded-sm px-1 font-bold transition-colors hover:text-primary"
+			>
+				Quartos
+			</a>
 				<Button class="" on:click={() => signOut(auth)}>Sair</Button>
 			</nav>
 			<AnimatedRoute>
