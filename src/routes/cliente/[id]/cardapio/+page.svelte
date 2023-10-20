@@ -39,11 +39,13 @@
 
 			{#each categorias as categoria}
 				<Tabs.Content value={categoria}>
+					<div class="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))]">
 					{#each produtosFrom(categoria) as produto}
 						<FormPedido {produto} cliente={$cliente} id={cliente.id}>
 							<CardProduto {produto} />
 						</FormPedido>
 					{/each}
+					</div>
 				</Tabs.Content>
 			{/each}
 		</Tabs.Root>

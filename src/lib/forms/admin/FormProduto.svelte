@@ -9,6 +9,7 @@
 	import type { IngredProduto, Produto } from '$lib/firebase-types';
 	import { updateDoc, arrayUnion } from 'firebase/firestore';
 	import { getFirebaseContext } from 'sveltefire';
+	import * as AlertDialog from '$lib/components/ui/alert-dialog';
 
 	import * as Tabs from '$lib/components/ui/tabs';
 
@@ -133,14 +134,14 @@
 		}
 		// update the document with the new products array
 		try {
-			
 			await updateDoc(cardRef, {
 				produtos: new_prods
 			});
-			notifications.push('deleted')
+			notifications.push('deleted');
 		} catch (error) {
-			notifications.push('error deleting')
+			notifications.push('error deleting');
 		}
+		open = false;
 	}
 
 	async function editProduto() {
@@ -224,9 +225,11 @@
 		$formData.url = url;
 		console.log('upload concluido' + url);
 	}
+
+	let open = false;
 </script>
 
-<Dialog.Root>
+<Dialog.Root bind:open>
 	<Dialog.Trigger>
 		<slot />
 	</Dialog.Trigger>
@@ -237,9 +240,20 @@
 				Preencha os campos abaixo para cadastrar um novo Produto.
 			</Dialog.Description>
 		</Dialog.Header>
-		<button class="bg-red-500 text-red-950 p-2 rounded-sm" on:click={() => deleteProduto()}
-			>deletar</button
-		>
+
+		<AlertDialog.Root>
+			<AlertDialog.Trigger class="bg-red-400 p-2 rounded-sm">Deletar</AlertDialog.Trigger>
+			<AlertDialog.Content class="text-white">
+				<AlertDialog.Header>
+					<AlertDialog.Title>Tem certeza que deseja deletar o produto?</AlertDialog.Title>
+					<AlertDialog.Description />
+				</AlertDialog.Header>
+				<AlertDialog.Footer>
+					<Button href="/admin/clientes" on:click={deleteProduto}>SIM</Button>
+					<AlertDialog.Cancel>NAO</AlertDialog.Cancel>
+				</AlertDialog.Footer>
+			</AlertDialog.Content>
+		</AlertDialog.Root>
 
 		<!-- <Tabs.Root>
 			<Tabs.List class="flex justify-center data-[state=active]:text-white">

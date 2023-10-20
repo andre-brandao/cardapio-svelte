@@ -17,16 +17,16 @@ Chale 4: https://cafedavillla.com/cliente/mesa/C3Zt4
 	<!-- generate a link car to each unit -->
 	<h1 class="text-white text-center font-bold">Quartos</h1>
 	<div class="quartos">
-		<a href="https://cafedavillla.com/cliente/mesa/QGRo1">Quarto 1</a>
-		<a href="https://cafedavillla.com/cliente/mesa/QVRc2">Quarto 2</a>
-		<a href="https://cafedavillla.com/cliente/mesa/Q81s3">Quarto 3</a>
+		<a href="/cliente/mesa/QGRo1">Quarto 1</a>
+		<a href="/cliente/mesa/QVRc2">Quarto 2</a>
+		<a href="/cliente/mesa/Q81s3">Quarto 3</a>
 	</div>
 	<h1 class="text-white text-center font-bold">Chales</h1>
 	<div class="quartos">
-		<a href="https://cafedavillla.com/cliente/mesa/C9Zt1">Chale 1</a>
-		<a href="https://cafedavillla.com/cliente/mesa/C1Zt2">Chale 2</a>
-		<a href="https://cafedavillla.com/cliente/mesa/C2Zt3">Chale 3</a>
-		<a href="https://cafedavillla.com/cliente/mesa/C3Zt4">Chale 4</a>
+		<a href="/cliente/mesa/C9Zt1">Chale 1</a>
+		<a href="/cliente/mesa/C1Zt2">Chale 2</a>
+		<a href="/cliente/mesa/C2Zt3">Chale 3</a>
+		<a href="/cliente/mesa/C3Zt4">Chale 4</a>
 	</div>
 </main>
 
