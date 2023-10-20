@@ -54,7 +54,7 @@
 	<AlertDialog.Trigger>
 		<slot />
 	</AlertDialog.Trigger>
-	<AlertDialog.Content>
+	<AlertDialog.Content class="text-white">
 		<AlertDialog.Header>
 			<AlertDialog.Title>{produto.nome}</AlertDialog.Title>
 			<AlertDialog.Description>

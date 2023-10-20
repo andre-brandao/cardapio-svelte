@@ -37,6 +37,8 @@
 		});
 		total = sum;
 	}
+
+	$:linkcliente = `/cliente/${clienteId}/cardapio`;
 </script>
 
 <main class="flex flex-col">
@@ -50,8 +52,10 @@
 					cliente={$cliente}
 					id_cliente={cliente.ref}
 				/>
-				<QRcode value={`https://cafedavilla.vercel.app/cliente/${cliente.ref.id}/cardapio`}>abrir qr code</QRcode>
-			{/if}
+				<QRcode value={`https://cafedavillla.com/cliente/${cliente.ref.id}/cardapio`}>abrir qr code</QRcode>
+
+				<a href={`/cliente/${cliente.id}/cardapio`} target="_blank" class="text-white bg-black">abrir cardapio</a>
+				{/if}
 		</div>
 	{/if}
 	{#if pedidosEntregues.length > 0}
