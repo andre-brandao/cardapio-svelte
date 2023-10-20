@@ -117,6 +117,32 @@
 		console.log('Produto cadastrado com sucesso');
 	}
 
+	async function deleteProduto() {
+		const cardRef = cardapioStore.ref;
+		const prods = $cardapioStore?.produtos;
+
+		const new_prods = prods?.filter((p) => p.id !== dfProd.id);
+
+		console.log('Deleted product:', dfProd.nome);
+		console.log('Old products:', prods);
+		console.log('New products:', new_prods);
+
+		if (cardRef == null) {
+			console.log('cardRef undefined');
+			return;
+		}
+		// update the document with the new products array
+		try {
+			
+			await updateDoc(cardRef, {
+				produtos: new_prods
+			});
+			notifications.push('deleted')
+		} catch (error) {
+			notifications.push('error deleting')
+		}
+	}
+
 	async function editProduto() {
 		const cardRef = cardapioStore.ref;
 
@@ -145,7 +171,8 @@
 		// console.log(ingredientes_add);
 		console.log($formData);
 		if ($formData.url === undefined) {
-			$formData.url = 'https://firebasestorage.googleapis.com/v0/b/svelte-cardapio.appspot.com/o/static%2Fno_image.jpg?alt=media&token=cf56867b-39f9-4419-9d6c-aa94d7ce640a'
+			$formData.url =
+				'https://firebasestorage.googleapis.com/v0/b/svelte-cardapio.appspot.com/o/static%2Fno_image.jpg?alt=media&token=cf56867b-39f9-4419-9d6c-aa94d7ce640a';
 		}
 		prods.forEach((p) => {
 			if (p.id == dfProd.id) {
@@ -210,6 +237,9 @@
 				Preencha os campos abaixo para cadastrar um novo Produto.
 			</Dialog.Description>
 		</Dialog.Header>
+		<button class="bg-red-500 text-red-950 p-2 rounded-sm" on:click={() => deleteProduto()}
+			>deletar</button
+		>
 
 		<!-- <Tabs.Root>
 			<Tabs.List class="flex justify-center data-[state=active]:text-white">
