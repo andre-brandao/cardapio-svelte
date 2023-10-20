@@ -196,7 +196,7 @@
 		</Dialog.Header>
 
 		<Tabs.Root>
-			<Tabs.List class="flex justify-center">
+			<Tabs.List class="flex justify-center data-[state=active]:text-white">
 				<Tabs.Trigger value="dados">Cardapio</Tabs.Trigger>
 				<Tabs.Trigger value="ingredientes">Ingredientes</Tabs.Trigger>
 			</Tabs.List>
@@ -344,6 +344,7 @@
 		<Dialog.Footer>
 			<Button
 				type="submit"
+				class='hover:bg-green-200 hover:text-black'
 				disabled={!isValidCadastro && !isValidUpdate}
 				on:click={() => {
 					handleSubmit();
