@@ -14,7 +14,7 @@ export interface Produto {
     vegano: boolean;
     visivel: boolean;
     url?: string;
-    ingredientes?: IngredProduto[];
+    // ingredientes?: IngredProduto[];
 }
 
 export interface Cardapio {

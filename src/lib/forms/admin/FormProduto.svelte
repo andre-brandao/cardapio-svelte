@@ -12,21 +12,27 @@
 
 	import * as Tabs from '$lib/components/ui/tabs';
 
-	onMount(() => {
-		if (dfProd.ingredientes != undefined) {
-			ingredientes_add = dfProd.ingredientes;
-		}
-	});
-	$: console.log($formData.ingredientes);
-	let produtos = $cardapioStore?.produtos ?? [];
-	let input_ingrediente = {
-		nome: '',
-		quantidade: 0
-	};
-	let ingredientes_add: IngredProduto[] = [];
-	$: console.log(ingredientes_add + dfProd.nome);
-	$: console.log(ingrediente_valido);
-	$: ingrediente_valido = $estoqueStore?.items.some((item) => item.nome == input_ingrediente.nome);
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+
+	import Notification, { notifications } from '$lib/Notification.svelte';
+
+	// onMount(() => {
+	// 	if (dfProd.ingredientes != undefined) {
+	// 		ingredientes_add = dfProd.ingredientes;
+	// 	}
+	// });
+	// $: console.log($formData.ingredientes);
+	// let produtos = $cardapioStore?.produtos ?? [];
+	// let input_ingrediente = {
+	// 	nome: '',
+	// 	quantidade: 0
+	// };
+	// let ingredientes_add: IngredProduto[] = [];
+	// $: console.log(ingredientes_add + dfProd.nome);
+	// $: console.log(ingrediente_valido);
+	// $: ingrediente_valido = $estoqueStore?.items.some((item) => item.nome == input_ingrediente.nome);
 	// !ingredientes_add.some((item) => item.nome == input_ingrediente.nome);
 
 	const { auth, firestore } = getFirebaseContext();
@@ -70,8 +76,8 @@
 		subcategoria: dfProd.subcategoria,
 		vegano: dfProd.vegano,
 		visivel: dfProd.visivel,
-		url: dfProd.url,
-		ingredientes: ingredientes_add
+		url: dfProd.url
+		// ingredientes: ingredientes_add
 	};
 
 	const formData = writable(formDefaults);
@@ -104,10 +110,10 @@
 			subcategoria: '',
 			vegano: false,
 			visivel: true,
-			url: '',
-			ingredientes: []
+			url: ''
+			// ingredientes: []
 		});
-		ingredientes_add = [];
+		// ingredientes_add = [];
 		console.log('Produto cadastrado com sucesso');
 	}
 
@@ -138,7 +144,9 @@
 		}
 		// console.log(ingredientes_add);
 		console.log($formData);
-
+		if ($formData.url === undefined) {
+			$formData.url = 'https://firebasestorage.googleapis.com/v0/b/svelte-cardapio.appspot.com/o/static%2Fno_image.jpg?alt=media&token=cf56867b-39f9-4419-9d6c-aa94d7ce640a'
+		}
 		prods.forEach((p) => {
 			if (p.id == dfProd.id) {
 				p.nome = $formData.nome;
@@ -149,16 +157,24 @@
 				p.vegano = $formData.vegano;
 				p.visivel = $formData.visivel;
 				p.url = $formData.url;
-				p.ingredientes = $formData.ingredientes;
+				// p.ingredientes = $formData.ingredientes;
 			}
 		});
+		try {
+			await updateDoc(cardRef, {
+				produtos: prods
+			});
 
-		await updateDoc(cardRef, {
-			produtos: prods
-		});
-		ingredientes_add = [];
+			notifications.push('Produto editado com sucesso');
+		} catch (error) {
+			console.log(error);
+			console.log(prods);
 
-		console.log('Produto editado com sucesso');
+			notifications.push('Erro ao editar produto');
+		}
+		// ingredientes_add = [];
+
+		// console.log('Produto editado com sucesso');
 	}
 
 	// FOTO --------------
@@ -195,102 +211,103 @@
 			</Dialog.Description>
 		</Dialog.Header>
 
-		<Tabs.Root>
+		<!-- <Tabs.Root>
 			<Tabs.List class="flex justify-center data-[state=active]:text-white">
 				<Tabs.Trigger value="dados">Cardapio</Tabs.Trigger>
 				<Tabs.Trigger value="ingredientes">Ingredientes</Tabs.Trigger>
 			</Tabs.List>
-			<Tabs.Content value="dados">
-				<div class="grid gap-4 py-4">
-					<div class="grid grid-cols-4 items-center gap-4">
-						<img
-							class=""
-							src={previewURL.length > 0
-								? previewURL
-								: 'https://firebasestorage.googleapis.com/v0/b/svelte-cardapio.appspot.com/o/static%2Fno_image.jpg?alt=media&token=cf56867b-39f9-4419-9d6c-aa94d7ce640a'}
-							alt=""
-							width="100"
-							height="100"
-						/>
-						<Input
-							class="col-span-3 bg-accent"
-							on:change={upload}
-							name="photoURL"
-							type="file"
-							accept="image/png, image/jpeg, image/gif, image/webp"
-						/>
-					</div>
-					<div class="grid grid-cols-4 items-center gap-4">
-						<Label class="text-right" for="name">Nome</Label>
-						<Input
-							id="name"
-							bind:value={$formData.nome}
-							class="col-span-3 bg-accent"
-							placeholder="Coca Cola"
-						/>
-					</div>
-					<div class="grid grid-cols-4 items-center gap-4">
-						<Label for="descricao" class="text-right">Descrição</Label>
+			<Tabs.Content value="dados"> -->
+		<div class="grid gap-4 py-4">
+			<div class="grid grid-cols-4 items-center gap-4">
+				<img
+					class=""
+					src={previewURL.length > 0
+						? previewURL
+						: 'https://firebasestorage.googleapis.com/v0/b/svelte-cardapio.appspot.com/o/static%2Fno_image.jpg?alt=media&token=cf56867b-39f9-4419-9d6c-aa94d7ce640a'}
+					alt=""
+					width="100"
+					height="100"
+				/>
+				<Input
+					class="col-span-3 bg-accent"
+					on:change={upload}
+					name="photoURL"
+					type="file"
+					accept="image/png, image/jpeg, image/gif, image/webp"
+				/>
+			</div>
+			<div class="grid grid-cols-4 items-center gap-4">
+				<Label class="text-right" for="name">Nome</Label>
+				<Input
+					id="name"
+					bind:value={$formData.nome}
+					class="col-span-3 bg-accent"
+					placeholder="Coca Cola"
+				/>
+			</div>
+			<div class="grid grid-cols-4 items-center gap-4">
+				<Label for="descricao" class="text-right">Descrição</Label>
 
-						<Textarea
-							id="descricao"
-							class="col-span-3 bg-accent"
-							placeholder="Descrição"
-							bind:value={$formData.descricao}
-						/>
-					</div>
-					<div class="grid grid-cols-4 items-center gap-4">
-						<Label class="text-right">Categoria</Label>
-						<Input
-							id="categoria"
-							bind:value={$formData.categoria}
-							class="col-span-3 bg-accent"
-							placeholder="Comida/Bebida"
-						/>
-					</div>
+				<Textarea
+					id="descricao"
+					class="col-span-3 bg-accent"
+					placeholder="Descrição"
+					bind:value={$formData.descricao}
+				/>
+			</div>
+			<div class="grid grid-cols-4 items-center gap-4">
+				<Label class="text-right">Categoria</Label>
+				<Input
+					id="categoria"
+					bind:value={$formData.categoria}
+					class="col-span-3 bg-accent"
+					placeholder="Comida/Bebida"
+				/>
+			</div>
 
-					<div class="grid grid-cols-4 items-center gap-4">
-						<Label class="text-right">Subcategoria</Label>
-						<Input
-							id="subcategoria"
-							bind:value={$formData.subcategoria}
-							class="col-span-3 bg-accent"
-							placeholder="Caldos/Fritos/Sanduiches"
-						/>
-					</div>
+			<div class="grid grid-cols-4 items-center gap-4">
+				<Label class="text-right">Subcategoria</Label>
+				<Input
+					id="subcategoria"
+					bind:value={$formData.subcategoria}
+					class="col-span-3 bg-accent"
+					placeholder="Caldos/Fritos/Sanduiches"
+				/>
+			</div>
 
-					<div class="grid grid-cols-4 items-center gap-4">
-						<Label class="text-right">Preço:R$</Label>
-						<Input
-							id="subcategoria"
-							type="number"
-							min="0"
-							step="0.01"
-							bind:value={$formData.preco}
-							class="col-span-3 bg-accent"
-							placeholder="Caldos/Fritos/Sanduiches"
-						/>
-					</div>
+			<div class="grid grid-cols-4 items-center gap-4">
+				<Label class="text-right">Preço:R$</Label>
+				<Input
+					id="subcategoria"
+					type="number"
+					min="0"
+					step="0.01"
+					bind:value={$formData.preco}
+					class="col-span-3 bg-accent"
+					placeholder="Caldos/Fritos/Sanduiches"
+				/>
+			</div>
 
-					<div class="flex justify-around">
-						<div class="flex items-center space-x-2">
-							<Switch id="switch-vegano" bind:checked={$formData.vegano} />
-							<Label for="switch-vegano" class="font-bold">Vegano</Label>
-						</div>
-						<div class="flex items-center space-x-2">
-							<Switch id="switch-visivel" bind:checked={$formData.visivel} />
-							<Label for="switch-visivel" class="font-bold">Visivel no Cardapio</Label>
-						</div>
-					</div>
+			<div class="flex justify-around">
+				<div class="flex items-center space-x-2">
+					<Switch id="switch-vegano" bind:checked={$formData.vegano} />
+					<Label for="switch-vegano" class="font-bold">Vegano</Label>
 				</div>
-			</Tabs.Content>
+				<div class="flex items-center space-x-2">
+					<Switch id="switch-visivel" bind:checked={$formData.visivel} />
+					<Label for="switch-visivel" class="font-bold">Visivel no Cardapio</Label>
+				</div>
+			</div>
+		</div>
+		<!-- </Tabs.Content>
 			<Tabs.Content value="ingredientes">
 				<div class="grid gap-4 py-4">
 					{#each ingredientes_add as prod, i}
 						<div class="grid grid-cols-2 items-center gap-4 justify-center">
 							<Label class="justify-self-end">{prod.nome} {prod.quantidade}</Label>
 
-							<Button class="justify-self-start"
+							<Button
+								class="justify-self-start"
 								on:click={() => {
 									ingredientes_add = ingredientes_add.filter((item) => item.nome !== prod.nome);
 								}}>🗑️</Button
@@ -339,18 +356,42 @@
 					</Button>
 				</div>
 			</Tabs.Content>
-		</Tabs.Root>
+		</Tabs.Root> -->
 
 		<Dialog.Footer>
 			<Button
 				type="submit"
-				class='hover:bg-green-200 hover:text-black'
+				class="hover:bg-green-200 hover:text-black"
 				disabled={!isValidCadastro && !isValidUpdate}
 				on:click={() => {
 					handleSubmit();
 					console.log(action);
+					dispatch('save_product');
 				}}>Save changes</Button
 			>
 		</Dialog.Footer>
+		<Notification let:payload duration={2000}>
+			<span>
+				{payload}
+			</span>
+		</Notification>
 	</Dialog.Content>
 </Dialog.Root>
+
+<style>
+	span {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+
+		background-color: white;
+		border-top-left-radius: 0.5rem;
+		color: black;
+		/* display: block; */
+		position: fixed;
+		top: 0;
+		left: 0;
+		padding: 2.5rem;
+		box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+	}
+</style>
