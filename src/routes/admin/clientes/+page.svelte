@@ -46,7 +46,7 @@
     </div>
     <div class="grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-4">
 	
-		{#each $clientes ?? [] as cliente}
+		{#each clientesFiltrados ?? [] as cliente}
 			<a href={`/admin/clientes/${cliente.id}`}>
 				<CardCliente {cliente} />
 			</a>

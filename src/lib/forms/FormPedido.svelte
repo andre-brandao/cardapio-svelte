@@ -6,8 +6,10 @@
 	import { firestore } from '$lib/firebase';
 	import type { Cliente, Produto } from '$lib/firebase-types';
 	import { serverTimestamp, collection, addDoc } from 'firebase/firestore';
-    export let id = '';
-    export let cliente:Cliente;
+	import { notifications } from '$lib/Notification.svelte';
+
+	export let id = '';
+	export let cliente: Cliente;
 
 	export let produto: Produto = {
 		id: '',
@@ -25,7 +27,7 @@
 
 		const pedidoColle = collection(firestore, `pedidos`);
 
-	if (cliente) {
+		if (cliente) {
 			const data = {
 				produto: produto,
 				cliente: cliente,
@@ -40,6 +42,7 @@
 			const docume = await addDoc(pedidoColle, data);
 			console.log('Pedido criado sucesso');
 			console.log(current_time);
+			notifications.push('Pedido criado com sucesso');
 		} else {
 			console.log('Cliente nao encontrado');
 			alert('Cliente nao encontrado');
@@ -48,9 +51,11 @@
 
 	let obsInpt: string = '';
 	let quantInput: number = 1;
+
+	let open = false;
 </script>
 
-<AlertDialog.Root>
+<AlertDialog.Root bind:open>
 	<AlertDialog.Trigger>
 		<slot />
 	</AlertDialog.Trigger>
@@ -73,7 +78,12 @@
 		</AlertDialog.Header>
 		<AlertDialog.Footer>
 			<AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
-				<Button on:click={novo_pedido}>Continuar</Button>
+			<Button
+				on:click={() => {
+					novo_pedido();
+					open	= false;
+				}}>Continuar</Button
+			>
 			<!-- <AlertDialog.Action on:click={novo_pedido}>Continue</AlertDialog.Action> -->
 		</AlertDialog.Footer>
 	</AlertDialog.Content>

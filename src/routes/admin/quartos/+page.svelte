@@ -28,6 +28,12 @@ Chale 4: https://cafedavillla.com/cliente/mesa/C3Zt4
 		<a href="/cliente/mesa/C2Zt3" target="_blank">Chale 3</a>
 		<a href="/cliente/mesa/C3Zt4" target="_blank">Chale 4</a>
 	</div>
+	<h1 class="text-white text-center font-bold">Visitantes</h1>
+	<div class="visi">
+
+		<a href="/cliente/mesa/Vd736" target="_blank">Visitantes</a>
+	</div>
+
 </main>
 
 <style>
@@ -40,6 +46,12 @@ Chale 4: https://cafedavillla.com/cliente/mesa/C3Zt4
 		display: grid;
 		place-items: center;
 		grid-template-columns: repeat(3, 1fr);
+	}
+	
+	.visi{
+		display: grid;
+		place-items: center;
+		grid-template-columns: repeat(1, 1fr);
 	}
 	a {
 		margin: 10px;

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
 	import * as Card from '$lib/components/ui/card';
-	import { firestore } from '$lib/firebase';
+	import { firestore, user } from '$lib/firebase';
 	import type { Pedido } from '$lib/firebase-types';
-	import { doc, updateDoc } from 'firebase/firestore';
+	import { Timestamp, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 	import * as AlertDialog from '$lib/components/ui/alert-dialog';
 	export let pedido: Pedido;
 	export let id: string;
@@ -15,8 +15,13 @@
 			alert('id vazio');
 			return;
 		}
+		if ($user == null) {
+			alert('usuário não logado');
+			return;
+		}
+		const userID = $user.email;
 		const pedidoRef = doc(firestore, 'pedidos', id);
-		updateDoc(pedidoRef, { status: status });
+		updateDoc(pedidoRef, { status: status, entregador: userID, edit_time: serverTimestamp() });
 	}
 </script>
 
@@ -46,7 +51,19 @@
 		</div>
 		<Card.Description>
 			<div>
-				OBS: {pedido.observacao}
+				<p>
+					OBS: {pedido.observacao}
+				</p>
+				{#if pedido.entregador}
+					<p>
+						entregador:{pedido.entregador}
+					</p>
+				{/if}
+				{#if pedido.edit_time}
+					<p>
+						alterado:{pedido.edit_time?.toDate()}
+					</p>
+				{/if}
 			</div>
 		</Card.Description>
 	</Card.Header>

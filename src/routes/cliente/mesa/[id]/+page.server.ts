@@ -8,6 +8,7 @@ function getIdString(id: string): string {
       ['C1Zt2', 'Chale 2'],
       ['C2Zt3', 'Chale 3'],
       ['C3Zt4', 'Chale 4'],
+      ['Vd736', 'Visitante'],
     ]);
     
     return idMap.get(id) || 'Invalid ID';

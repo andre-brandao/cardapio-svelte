@@ -96,6 +96,11 @@
 			return;
 		}
 
+		$formData.nome = $formData.nome.trim();
+		$formData.categoria = $formData.categoria.trim();
+		$formData.descricao = $formData.descricao.trim();
+		$formData.subcategoria = $formData.subcategoria.trim();
+
 		await updateDoc(cardRef, {
 			produtos: arrayUnion({
 				...$formData,
@@ -177,11 +182,11 @@
 		}
 		prods.forEach((p) => {
 			if (p.id == dfProd.id) {
-				p.nome = $formData.nome;
-				p.categoria = $formData.categoria;
-				p.descricao = $formData.descricao;
+				p.nome = $formData.nome.trim();
+				p.categoria = $formData.categoria.trim();
+				p.descricao = $formData.descricao.trim();
 				p.preco = $formData.preco;
-				p.subcategoria = $formData.subcategoria;
+				p.subcategoria = $formData.subcategoria.trim();
 				p.vegano = $formData.vegano;
 				p.visivel = $formData.visivel;
 				p.url = $formData.url;
@@ -241,19 +246,7 @@
 			</Dialog.Description>
 		</Dialog.Header>
 
-		<AlertDialog.Root>
-			<AlertDialog.Trigger class="bg-red-400 p-2 rounded-sm">Deletar</AlertDialog.Trigger>
-			<AlertDialog.Content class="text-white">
-				<AlertDialog.Header>
-					<AlertDialog.Title>Tem certeza que deseja deletar o produto?</AlertDialog.Title>
-					<AlertDialog.Description />
-				</AlertDialog.Header>
-				<AlertDialog.Footer>
-					<Button href="/admin/clientes" on:click={deleteProduto}>SIM</Button>
-					<AlertDialog.Cancel>NAO</AlertDialog.Cancel>
-				</AlertDialog.Footer>
-			</AlertDialog.Content>
-		</AlertDialog.Root>
+		
 
 		<!-- <Tabs.Root>
 			<Tabs.List class="flex justify-center data-[state=active]:text-white">
@@ -263,15 +256,17 @@
 			<Tabs.Content value="dados"> -->
 		<div class="grid gap-4 py-4">
 			<div class="grid grid-cols-4 items-center gap-4">
-				<img
-					class=""
-					src={previewURL.length > 0
-						? previewURL
-						: 'https://firebasestorage.googleapis.com/v0/b/svelte-cardapio.appspot.com/o/static%2Fno_image.jpg?alt=media&token=cf56867b-39f9-4419-9d6c-aa94d7ce640a'}
-					alt=""
-					width="100"
-					height="100"
-				/>
+				<a href={previewURL} download={$formData.nome + '.png'} on:click|preventDefault>
+					<img class="object-cover aspect-square"
+						 src={previewURL.length > 0
+								? previewURL
+								: 'https://firebasestorage.googleapis.com/v0/b/svelte-cardapio.appspot.com/o/static%2Fno_image.jpg?alt=media&token=cf56867b-39f9-4419-9d6c-aa94d7ce640a'}
+						 alt=""
+						 width="100"
+						 height="100"
+					/>
+				  </a>
+				  
 				<Input
 					class="col-span-3 bg-accent"
 					on:change={upload}
@@ -342,6 +337,19 @@
 					<Label for="switch-visivel" class="font-bold">Visivel no Cardapio</Label>
 				</div>
 			</div>
+			<AlertDialog.Root>
+				<AlertDialog.Trigger class="bg-red-400 p-2 rounded-sm">Deletar</AlertDialog.Trigger>
+				<AlertDialog.Content class="text-white">
+					<AlertDialog.Header>
+						<AlertDialog.Title>Tem certeza que deseja deletar o produto?</AlertDialog.Title>
+						<AlertDialog.Description />
+					</AlertDialog.Header>
+					<AlertDialog.Footer>
+						<Button href="/admin/clientes" on:click={deleteProduto}>SIM</Button>
+						<AlertDialog.Cancel>NAO</AlertDialog.Cancel>
+					</AlertDialog.Footer>
+				</AlertDialog.Content>
+			</AlertDialog.Root>
 		</div>
 		<!-- </Tabs.Content>
 			<Tabs.Content value="ingredientes">

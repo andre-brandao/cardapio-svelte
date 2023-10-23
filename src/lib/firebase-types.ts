@@ -36,6 +36,7 @@ export interface Pedido{
     id?:string;
     created:Timestamp;
     
+    
     cliente:Cliente;
     produto:Produto;
 
@@ -44,6 +45,9 @@ export interface Pedido{
     mesa:string;
     observacao:string;
     quantidade:number;
+
+    entregador?:string;
+    edit_time?:Timestamp;
 }
 // const data = {
 //     id: user.user.uid,

@@ -20,7 +20,7 @@
 		alt=""
 	/>
 
-	<p class="mr-5 mt-7">Ola,{$cliente?.nome}</p>
+	<p class="mr-5 mt-7 text-white font-bold">Olá, {$cliente?.nome}</p>
 </div>
 
 {#if $cliente}

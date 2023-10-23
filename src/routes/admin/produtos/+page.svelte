@@ -45,7 +45,7 @@
 	</div>
 	<Tabs.Root value={categorias[0]}>
 		<div>
-			<Tabs.List class="flex overflow-y-scroll">
+			<Tabs.List class="flex overflow-y-auto">
 				{#each categorias as categoria}
 					<Tabs.Trigger class="font-bold data-[state=active]:text-white" value={categoria}
 						>{categoria}</Tabs.Trigger
