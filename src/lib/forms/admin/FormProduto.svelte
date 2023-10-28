@@ -159,7 +159,7 @@
 		}
 
 		let existe = prods?.find((p) => {
-			if (p.id == dfProd.id) {
+			if (p.id === dfProd.id) {
 				console.log('prod existe');
 				return true;
 			}
@@ -224,7 +224,10 @@
 		uploading = true;
 		const file = e.target.files[0];
 		previewURL = URL.createObjectURL(file);
-		const storageRef = ref(storage, `produtos/${idProduto}.png`);
+
+		const filename = $formData.nome + '-' + generateUid();
+
+		const storageRef = ref(storage, `produtos/${filename}.png`);
 		const result = await uploadBytes(storageRef, file);
 		const url = await getDownloadURL(result.ref);
 		$formData.url = url;
@@ -246,8 +249,6 @@
 			</Dialog.Description>
 		</Dialog.Header>
 
-		
-
 		<!-- <Tabs.Root>
 			<Tabs.List class="flex justify-center data-[state=active]:text-white">
 				<Tabs.Trigger value="dados">Cardapio</Tabs.Trigger>
@@ -257,16 +258,17 @@
 		<div class="grid gap-4 py-4">
 			<div class="grid grid-cols-4 items-center gap-4">
 				<a href={previewURL} download={$formData.nome + '.png'} on:click|preventDefault>
-					<img class="object-cover aspect-square"
-						 src={previewURL.length > 0
-								? previewURL
-								: 'https://firebasestorage.googleapis.com/v0/b/svelte-cardapio.appspot.com/o/static%2Fno_image.jpg?alt=media&token=cf56867b-39f9-4419-9d6c-aa94d7ce640a'}
-						 alt=""
-						 width="100"
-						 height="100"
+					<img
+						class="object-cover aspect-square"
+						src={previewURL.length > 0
+							? previewURL
+							: 'https://firebasestorage.googleapis.com/v0/b/svelte-cardapio.appspot.com/o/static%2Fno_image.jpg?alt=media&token=cf56867b-39f9-4419-9d6c-aa94d7ce640a'}
+						alt=""
+						width="100"
+						height="100"
 					/>
-				  </a>
-				  
+				</a>
+
 				<Input
 					class="col-span-3 bg-accent"
 					on:change={upload}
