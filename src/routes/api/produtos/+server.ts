@@ -1,5 +1,5 @@
-import { cardapioStore } from '$lib/firebase';
-import { getDoc } from 'firebase/firestore';
+import { cardapioStore, firestore } from '$lib/firebase';
+import { doc, getDoc } from 'firebase/firestore';
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
 
@@ -13,10 +13,7 @@ export async function GET({ setHeaders }) {
 		'CDN-Cache-Control': `public, s-maxage=${year}`,
 		'Vercel-CDN-Cache-Control': `public, s-maxage=${year}`
 	});
-	if (cardapioStore.ref) {
-		const produtos = await getDoc(cardapioStore.ref);
-		return json(produtos);
-	}else{
-        return json({error: "Cardapio não encontrado"});
-    }
+
+	const produtos = await getDoc(doc(firestore, 'cardapios/sHs73YG49ZMXJMoeQPzv'));
+	return json(produtos);
 }
