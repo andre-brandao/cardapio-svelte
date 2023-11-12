@@ -2,6 +2,7 @@ import { cardapioStore, firestore } from '$lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
+import type { Produto } from '$lib/firebase-types';
 
 export async function GET({ setHeaders }) {
 	const year = 60 * 60 * 24 * 365;
@@ -15,5 +16,16 @@ export async function GET({ setHeaders }) {
 	});
 
 	const produtos = await getDoc(doc(firestore, 'cardapios/sHs73YG49ZMXJMoeQPzv'));
-	return json(produtos);
+    let produtoArray: Produto[] =[]
+    produtos.exists()
+    if (produtos.exists()) {
+        
+        produtos.data().produtos.forEach((produto: Produto) => {
+            produtoArray = [...produtoArray, produto]
+        })
+        return json(produtoArray);
+    }
+    else {
+        return json({erro: 'Cardápio não encontrado'})
+    }
 }
